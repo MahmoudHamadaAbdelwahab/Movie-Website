@@ -19,6 +19,7 @@ namespace MvcMovie.Controllers
             IQueryable<string> genreQuery = from m in _context.TbMovie
                                             orderby m.Genre
                                             select m.Genre;
+
             var movies = from m in _context.TbMovie
                          select m;
 
@@ -46,25 +47,25 @@ namespace MvcMovie.Controllers
         {
             return "From [HttpPost]Index: filter on " + searchString;
         }
-        public IActionResult Create() {
-
+        // GET: Movies/Create
+        public IActionResult Create()
+        {
             return View();
         }
-        // GET: Movies/Details/5
-        public async Task<IActionResult> Details(int? id)
+
+        // POST: Movies/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to.
+        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("Id,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
         {
-            if (id == null)
+            if (ModelState.IsValid)
             {
-                return NotFound();
+                _context.Add(movie);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
             }
-
-            var movie = await _context.TbMovie
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (movie == null)
-            {
-                return NotFound();
-            }
-
             return View(movie);
         }
 
@@ -123,5 +124,55 @@ namespace MvcMovie.Controllers
         {
             throw new NotImplementedException();
         }
+
+        // GET: Movies/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var movie = await _context.TbMovie
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (movie == null)
+            {
+                return NotFound();
+            }
+
+            return View(movie);
+        }
+
+
+        // GET: Movies/Delete/5
+        public async Task<IActionResult> Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var movie = await _context.TbMovie
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (movie == null)
+            {
+                return NotFound();
+            }
+
+            return View(movie);
+        }
+
+        // POST: Movies/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var movie = await _context.TbMovie.FindAsync(id);
+            _context.TbMovie.Remove(movie);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+
     }
 }
