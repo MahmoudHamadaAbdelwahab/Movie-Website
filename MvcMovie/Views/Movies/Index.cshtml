@@ -1,13 +1,15 @@
 ﻿@model MvcMovie.Models.SearchModel
+@using Microsoft.AspNetCore.Mvc.Localization
+@using Microsoft.AspNetCore.Localization
+
+@inject IViewLocalizer localizer
 
 @{
-    ViewData["Title"] = "Index";
+    var requestCulture = Context.Features.Get<IRequestCultureFeature>();
 }
 
-<h1>Index</h1>
-
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">@localizer["create"]</a>
 </p>
 <form asp-controller="Movies" asp-action="Index" method="get">
     <p>
@@ -25,22 +27,28 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Movies[0].Title)
+                @* @Html.DisplayNameFor(model => model.Movies[0].Title) *@
+                @localizer["title"]
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Movies[0].ReleaseDate)
+                @* @Html.DisplayNameFor(model => model.Movies[0].ReleaseDate) *@
+                @localizer["date"]
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Movies[0].Genre)
+                @* @Html.DisplayNameFor(model => model.Movies[0].Genre) *@
+                @localizer["gener"]
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Movies[0].Price)
+                @* @Html.DisplayNameFor(model => model.Movies[0].Price) *@
+                @localizer["price"]
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Movies[0].Rating)
+                @* @Html.DisplayNameFor(model => model.Movies[0].Rating) *@
+                @localizer["rating"]
             </th>
             <th>
-                Actions
+                @* Actions *@
+                @localizer["actions"]
             </th>
             <th></th>
         </tr>

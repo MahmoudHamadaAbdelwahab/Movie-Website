@@ -1,0 +1,29 @@
+{
+    // general 
+    "welcome": "مرحبا {0}, كيف حالك؟",
+    "home": "الرئيسية",
+    "privacy": "الخصوصية",
+    "movies": "الافلام",
+    "culture": "اللغة",
+    "uiCulture": "لغة واجهة المستخدم",
+    "test": "اختبار الموقع",
+    // create 
+    "date": "التاريخ",
+    "currency": "العملة",
+    "numbers": "الأرقام",
+
+    //kes use in form 
+    "create": "إضافة",
+    "save": "حفظ",
+    "name": "الاسم",
+    "required": "حقل مطلوب",
+
+    // movies view index
+    "title": "عنوان",
+    "date" : "تاريخ",
+    "gener": "نوع",
+    "price": "سعر",
+    "rating": "تقييم",
+    "actions": "الاكشن",
+    
+}
